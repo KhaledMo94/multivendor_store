@@ -24,29 +24,42 @@
     <x-dashboard.dashboard-breadcrumb :title="'Create New Category'" />
 
     <div class="container">
+        @if ($errors->any())
+            <p class="text-danger">
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            </p>
+        @endif
         <form method="POST" 
             class="my-2" 
             action="{{route('dashboard.categories.store')}}" 
             enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Name</label>
-                <input type="text" name="name"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <x-form.input name="name" label="Category Name" id="exampleInputEmail1" class="form-control" />
             </div>
 
             <div class="mb-3">
-                <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-                <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <x-form.textarea 
+                id="exampleFormControlTextarea1" 
+                label="Description" 
+                name="description"
+                row="3"
+                style="resize:none"
+                />
             </div>   
-            
             <div class="mb-3">
-                <label for="select-parent" class="form-label">Select Parent</label>
-                <select class="form-select" name="parent_id" id="exampleSelect">
-                    <option selected value="">Select a Parent Category</option>
-                    @foreach ($categories as $category)
-                    <option value="{{$category->id}}">{{$category->name}}</option>
-                    @endforeach
-                </select>
+                <x-form.select 
+                label="Select Parent"
+                name="parent_id"
+                id="select-parent"
+                :collection="$categories"
+                />
             </div>
 
             <div class="mb-3">

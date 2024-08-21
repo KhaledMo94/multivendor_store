@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Validation\Rule;
+use Symfony\Component\VarDumper\VarDumper;
+use App\Traits\TagifyParsing;
 
 class Category extends Model
 {
-    use HasFactory , SoftDeletes;
+    use HasFactory , SoftDeletes , TagifyParsing;
 
     protected $fillable = [
         'name','slug','description','parent_id',
@@ -25,6 +27,11 @@ class Category extends Model
         return $this->belongsTo(Category::class,'parent_id','id');
     }
 
+    public function getMetaValuesAttribute()
+    {
+        return TagifyParsing::convertTagifyOutputToArray($this->meta_keywords);
+    }
+    
     public static function ValidateCategory($request){
         return $request->validate([
             'name'                      =>"required|string|max:255|min:3|unique:categories,name",
@@ -34,7 +41,7 @@ class Category extends Model
             'status'                    =>['required',Rule::in('active','inactive')],
             'meta_title'                =>['nullable','string','max:255'],
             'meta_description'          =>['nullable','string'],
-            'meta_keywords'             =>['nullable','json']
+            'encoded_keywords'          =>['nullable','json']
         ]);
     }
 }

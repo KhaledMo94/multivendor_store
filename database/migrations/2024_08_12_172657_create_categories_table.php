@@ -19,8 +19,8 @@ return new class extends Migration
             $table->foreignId('parent_id')
                 ->nullable()
                 ->default(Null)
-                ->nullOnDelete()
                 ->constrained('categories')
+                ->nullOnDelete()
                 ->cascadeOnUpdate();
             $table->string('image')->nullable();
             $table->enum('status',['active','inactive'])->default('active');

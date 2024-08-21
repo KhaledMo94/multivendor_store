@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Faker\Factory;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;

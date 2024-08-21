@@ -43,17 +43,20 @@ class CategoryController extends Controller
             $uploaded_path = $uploaded_img->storeAs('categories',
             NamingUploadedImages::AccordingToModel($request->name ?? "").".".$uploaded_img->getClientOriginalExtension());
         }
-        Category::create([
+        $category = Category::create([
             'name'                          =>$request->name,
             'slug'                          =>Str::slug($request->name),
             'description'                   =>$request->description,
             'parent_id'                     =>$request->parent_id,
-            'image'                         =>$uploaded_path,
+            'image'                         =>$uploaded_path ?? Null,
             'status'                        =>$request->status,
             'meta_title'                    =>$request->meta_title,
             'meta_description'              =>$request->meta_description,
-            'meta_keywords'                 =>stripslashes($request->meta_keywords),
+            'meta_keywords'                 =>$request->meta_keywords,
         ]);
+        
+        return redirect()->route('dashboard.categories.index')
+                ->with('success',"$category->name Category Added Successfully");
     }
 
     /**
@@ -69,7 +72,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        
     }
 
     /**
@@ -85,6 +88,6 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        
     }
 }
