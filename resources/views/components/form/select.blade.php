@@ -16,7 +16,7 @@
     @endif
     {{ $attributes }}
     >
-    <option selected value="">{{ $label }}</option>
+    <option @selected($selected === Null ) value="">{{ $label }}</option>
     @foreach ($collection as $key=>$value)
         <option 
         value="{{$value->id}}"

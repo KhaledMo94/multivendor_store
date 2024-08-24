@@ -4,7 +4,7 @@
     'type'              =>'file',
     'id'                =>'id'.rand(0,10000),
     'accept'            =>'image/*',
-    'value'             =>''
+    'value'             =>'',
 ])
 
 <label for="{{ $id }}" class="form-label">{{ $label }}</label>

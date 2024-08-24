@@ -2,21 +2,29 @@
     'name',
     'label'                     =>$name,
     'data'                      =>[],
-    'value'                     =>''
+    'value'                     =>'',
 ])  
 <label class="form-label">{{ $label }}</label>
 @php
     $i=1;
+    if(old($name)){
+        $checked_value = old($name);
+    }elseif ($value) {
+        $checked_value = $value;
+    }else{
+        $checked_value = 'active';
+    }
 @endphp
+
 @foreach ( $data as $val =>$lab )
     <div class="form-check">
         <input 
         class="form-check-input" 
         type="radio" 
-        name="{{ $name }}" 
+        name="{{ $name }}"
+        @checked($val === $checked_value)
         id="{{ "option".$i }}" 
         value="{{ $val }}" 
-        @checked(old($name)==$val || $val == $value )
         @if ($errors->has($name))
             {{ $attributes->merge(['class'  =>'is-invalid']) }}
         @endif>

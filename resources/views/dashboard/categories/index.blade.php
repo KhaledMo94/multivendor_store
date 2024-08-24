@@ -8,12 +8,41 @@
                 @endif
             });
         </script>
+        <script>
+            function confirmDeletion() {
+                return confirm('Are you sure you want to remove this image?');
+            }
+        </script>
+        <style>
+            .image-container {
+                position: relative;
+                display: inline-block;
+            }
+            .category-image {
+                display: block;
+                max-width: 200px;
+                height: auto;
+            }
+            .remove-image-btn {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                background-color: red;
+                color: white;
+                border: none;
+                padding: 5px 10px;
+                font-size: 16px;
+                cursor: pointer;
+                border-radius: 50%;
+                opacity: 0.7;
+            }
+            .remove-image-btn:hover {
+                opacity: 1;
+            }
+        </style>
     </x-slot:optional_header_styles>
-    @if (session()->has('success'))
-        <div class="alert alert-success">
-            {{session('success')}}
-        </div>
-    @endif
+    <x-dashboard.dashboard-breadcrumb title="{{'Categories'}}" />
+    @include('components.dashboard.session-show')
     <a href="{{route('dashboard.categories.create')}}" class="btn btn-primary my-2">Add New Category</a>
     <table class="table table-striped">
         <thead>
@@ -37,7 +66,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($categories as $category)
+            @forelse ($categories as $category)
                 <tr>
                     <th scope="row">{{ $category->name }}</th>
                     <td>{{ $category->slug }}</td>
@@ -71,11 +100,26 @@
                         <form action="{{ route('dashboard.categories.destroy', $category->id) }}" method="post">
                             @csrf
                             @method('delete')
-                            <button type="submit" class="btn btn-outline-danger">Delete</button>
+                            <button type="submit" class="btn btn-outline-danger" onclick="return confirmDeletion()">Delete</button>
                         </form>
                     </th>
                 </tr>
-            @endforeach
+            @empty
+            <p class="font-weight-bolder">
+                Still No Categories Created 
+                <a href="{{ route('dashboard.categories.create') }}">Create Now</a>
+            </p>
+            @endforelse
         </tbody>
     </table>
+    @if ($categories->hasPages())
+        <div class="row">
+            <div class="col-md-6">
+                {{ $categories->links() }}
+            </div>
+            <div class="col-md-6">
+                <P>Showing {{ $categories->lastItem() }} of {{ $categories->total() }}</P>
+            </div>
+        </div>
+    @endif
 </x-dashboard.dashboard-layout>

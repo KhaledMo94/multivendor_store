@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Validation\Rule;
-use Symfony\Component\VarDumper\VarDumper;
 use App\Traits\TagifyParsing;
 
 class Category extends Model
@@ -32,12 +31,14 @@ class Category extends Model
         return TagifyParsing::convertTagifyOutputToArray($this->meta_keywords);
     }
     
-    public static function ValidateCategory($request){
+    public static function ValidateCategory($request , $id = Null){
         return $request->validate([
-            'name'                      =>"required|string|max:255|min:3|unique:categories,name",
+            'name'                      =>[
+                'required','string','max:255','min:3',Rule::unique('categories','name')->ignore($id)
+            ],
             'description'               =>"nullable|string|min:3",
             'parent_id'                 =>"nullable|int|exists:categories,id",
-            'image'                     =>['nullable','mimes:jpg,bmp,png','max:200'],
+            'image'                     =>['nullable','mimes:jpg,bmp,png','max:2048'],
             'status'                    =>['required',Rule::in('active','inactive')],
             'meta_title'                =>['nullable','string','max:255'],
             'meta_description'          =>['nullable','string'],
