@@ -10,14 +10,14 @@
             var input = document.querySelector('input[name=meta_keywords]');
             var tagify = new Tagify(input);
 
-        function previewImage(event) {
-        var reader = new FileReader();
-        reader.onload = function(){
-            var output = document.getElementById('imagePreview');
-            output.src = reader.result;
-        };
-        reader.readAsDataURL(event.target.files[0]);
-    }
+            function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function(){
+                var output = document.getElementById('imagePreview');
+                output.src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+            }
         </script>
     </x-slot>
 
@@ -63,40 +63,48 @@
             </div>
 
             <div class="mb-3">
-                <label for="formFile" class="form-label">Category image</label>
-                <input class="form-control" name="image" type="file" id="formFile" accept="image/*" onchange="previewImage(event)">
-                <img id="imagePreview" class="my-1" style="max-width: 300px;">
+                <x-form.image-input
+                label="Category Image"
+                type="file"
+                name="image"
+                id="formFile"
+                accept=".png, .jpg, .jpeg"
+                onchange="previewImage(event)"
+                />
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Choose Status:</label>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="status" id="option1" value="active" checked>
-                    <label class="form-check-label" for="option1">
-                        Active
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="status" id="option2" value="inactive">
-                    <label class="form-check-label" for="option2">
-                        Inactive
-                    </label>
-                </div>
+                <x-form.radio 
+                name="status"
+                label="Choose Status:"
+                :data="['active'=>'Active','inactive'=>'Inactive']"
+                />
             </div>
 
             <div class="mb-3">
-                <label for="meta_title" class="form-label">Meta Title</label>
-                <input type="text" name="meta_title" class="form-control" id="meta_title" >
+                <x-form.input 
+                name="meta_title" 
+                label="Meta Title" 
+                id="metaTitle" 
+                class="form-control" />
             </div>
 
             <div class="mb-3">
-                <label for="metaKeywords" class="form-label">Meta Keywords</label>
-                <input name="meta_keywords" id="metaKeywords" class="form-control" placeholder="Add keywords">
+                <x-form.input 
+                name="meta_keywords" 
+                label="Meta Keywords" 
+                id="metaKeywords" 
+                class="form-control"
+                placeholder="Add Keywords"/>
             </div>
 
             <div class="mb-3">
-                <label for="MetaDescription" class="form-label">Meta Description</label>
-                <textarea class="form-control" id="MetaDescription" name="meta_description" rows="3"></textarea>
+                <x-form.textarea 
+                id="MetaDescription" 
+                label="Meta Description" 
+                name="meta_description"
+                row="3"
+                style="resize:none" />
             </div> 
 
             <button type="submit" class="btn btn-primary btn-lg">Submit</button>
