@@ -10,6 +10,9 @@
                     @if (request()->is('admin/categories/*'))
                     <li class="breadcrumb-item"><a href="{{route('dashboard.categories.index')}}">categories</a></li>
                     @endif
+                    @if (request()->is('admin/products/*'))
+                    <li class="breadcrumb-item"><a href="{{route('dashboard.products.index')}}">Products</a></li>
+                    @endif
                     @if ($title)
                         <li class="breadcrumb-item active">{{$title ?? ""}}</li>
                     @endif

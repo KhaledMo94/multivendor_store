@@ -42,6 +42,7 @@
     <!-- REQUIRED SCRIPTS -->
     <x-dashboard.footer-scripts  />
     {{ $optional_footer_scripts ?? ''}}
+
 </body>
 
 </html>

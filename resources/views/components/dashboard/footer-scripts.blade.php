@@ -14,3 +14,8 @@
         }
     }
 </script>
+<script src="https://unpkg.com/@yaireo/tagify"></script>
+<script src="https://unpkg.com/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
+@livewireScripts
+<x:pharaonic-tagify::scripts />
+{{-- <script src="//unpkg.com/alpinejs" defer></script> --}}

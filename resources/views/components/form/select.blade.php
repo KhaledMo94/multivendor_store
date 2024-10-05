@@ -19,8 +19,8 @@
     <option @selected($selected === Null ) value="">{{ $label }}</option>
     @foreach ($collection as $key=>$value)
         <option 
-        value="{{$value->id}}"
-        @selected((old($name) == $value->id ) || ($selected == $value->id))
-        >{{$value->name}}</option>
+        value="{{$value['id']}}"
+        @selected((old($name) == $value['id']) || ($selected == $value['id']))
+        >{{$value['name']}}</option>
     @endforeach
 </select>

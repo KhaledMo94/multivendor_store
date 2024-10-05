@@ -8,16 +8,17 @@ use Illuminate\Http\Request;
 use App\Traits\NamingUploadedImages;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use App\Traits\UsingTagify;
 
 class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    use NamingUploadedImages;
+    use NamingUploadedImages , UsingTagify;
     public function index()
     {
-        $categories = Category::paginate(3);
+        $categories = Category::paginate(10);
         return view('dashboard.categories.index', compact('categories'));
     }
 
@@ -27,8 +28,7 @@ class CategoryController extends Controller
     public function create()
     {
         $categories = Category::all('name', 'id');
-        $optional_styles_and_scripts = 'tagify';
-        return view('dashboard.categories.create',compact('categories','optional_styles_and_scripts'));
+        return view('dashboard.categories.create',compact('categories'));
     }
 
     /**
@@ -42,6 +42,7 @@ class CategoryController extends Controller
             $uploaded_path = $uploaded_img->storeAs('categories',
             NamingUploadedImages::AccordingToModel($request->name ?? "").".".$uploaded_img->getClientOriginalExtension());
         }
+        $meta_keywords = !is_null($request->meta_keywords) ? UsingTagify::acceptTagifyToArray($request->meta_keywords) :null;
         $category = Category::create([
             'name'                          =>$request->name,
             'slug'                          =>Str::slug($request->name),
@@ -51,7 +52,7 @@ class CategoryController extends Controller
             'status'                        =>$request->status,
             'meta_title'                    =>$request->meta_title,
             'meta_description'              =>$request->meta_description,
-            'meta_keywords'                 =>$request->meta_keywords,
+            'meta_keywords'                 =>$meta_keywords,
         ]);
         
         return redirect()->route('dashboard.categories.index')
@@ -69,9 +70,10 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category $category)
+    public function edit(Request $request , $id)
     {
-        $categories = Category::all();
+        $category = Category::findOrFail($id);
+        $categories = Category::all(['id','name']);
         return view('dashboard.categories.edit',compact('category','categories'));
     }
 
@@ -98,6 +100,7 @@ class CategoryController extends Controller
         if(isset($request->remove_image)){
             $new_path = null;
         }
+        $meta_keywords = !is_null($request->meta_keywords) ? UsingTagify::acceptTagifyToArray($request->meta_keywords) :null ;
         Category::where('id',$category->id)->update([
             'name'                          =>$request->name,
             'slug'                          =>Str::slug($request->name),
@@ -107,7 +110,7 @@ class CategoryController extends Controller
             'status'                        =>$request->status,
             'meta_title'                    =>$request->meta_title,
             'meta_description'              =>$request->meta_description,
-            'meta_keywords'                 =>$request->meta_keywords,
+            'meta_keywords'                 =>$meta_keywords,
         ]);
         return redirect()->route('dashboard.categories.index')
         ->with('success',$request->name." category updated successfully");

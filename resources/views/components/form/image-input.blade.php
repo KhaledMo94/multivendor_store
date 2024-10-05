@@ -19,16 +19,6 @@
     @endif
     {{$attributes}} 
     >
-<img 
-    id="imagePreview"
-    @empty($value)
-    @else
-    src="{{ asset('storage/'.$value) }}"
-    @endempty
-    class="my-1" 
-    style="max-width: 300px;"
-    >
-
     @if ($errors->has($name))
         @foreach ( $errors->get($name) as $error)
             <p class="text-danger">{{$error}}</p>
