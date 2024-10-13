@@ -9,5 +9,6 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 class Product_Category_pivot extends Pivot
 {
     use HasFactory;
-    
+
+    protected $table = 'category_product';
 }

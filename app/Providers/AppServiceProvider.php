@@ -7,7 +7,8 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
-use Pharaonic\Livewire\Tagify\TagifyServiceProvider;
+use App\Helpers\ImagesHelpers;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -17,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         class_alias(Carbon::class , 'Carbon');
+        class_alias(ImagesHelpers::class,'Image');
     }
 
     /**

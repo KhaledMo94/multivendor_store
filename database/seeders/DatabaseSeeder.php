@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Store;
 use App\Models\Tag;
 use App\Models\User;
+use App\Models\Dashboard\Product;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -22,8 +23,10 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         // Tag::factory(30)->create();
-        // $this->call(StoreSeeder::class);
-
         // $this->call(UserSeeder::class);
+        // $this->call(StoreSeeder::class);
+        // Store::factory(3)->create();
+
+        // Product::factory(50)->create();
     }
 }

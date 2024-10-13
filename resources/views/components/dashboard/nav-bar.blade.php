@@ -6,10 +6,13 @@
                     class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="index3.html" class="nav-link">Home</a>
+            <a href="{{ route('dashboard') }}" class="nav-link">Home</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link">Contact</a>
+            <a href="{{ route('dashboard.categories.index') }}" class="nav-link">Categories</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="{{ route('dashboard.products.index') }}" class="nav-link">Products</a>
         </li>
     </ul>
 

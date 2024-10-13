@@ -23,7 +23,7 @@ class Category extends Model
     protected static function booted()
     {
         static::addGlobalScopes([
-            LatestScope::class,
+
         ]);
     }
 
@@ -38,14 +38,14 @@ class Category extends Model
     }
 
     public function products(){
-        return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Category::class,'category_product');
     }
 
     public function getMetaValuesAttribute()
     {
         return TagifyParsing::convertTagifyOutputToArray($this->meta_keywords);
     }
-    
+
     public static function validateCategory($id = Null){
         return [
             'name'                      =>[

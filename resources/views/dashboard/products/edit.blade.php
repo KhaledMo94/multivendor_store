@@ -166,6 +166,7 @@
                             <label class="form-label" for="typeNumber1">Price</label>
                             <input 
                             type="number" 
+                            step="0.01"
                             name="price"
                             value="{{ old($product->price) ?? $product->price }}" 
                             id="typeNumber1" 
@@ -177,6 +178,7 @@
                             <label class="form-label" for="typeNumber2">After Discount</label>
                             <input 
                             type="number" 
+                            step="0.01"
                             value="{{ old($product->sale_price) ?? $product->sale_price }}" 
                             id="typeNumber2" 
                             name="sale_price"

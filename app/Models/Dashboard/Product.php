@@ -35,15 +35,12 @@ class Product extends Model
                 $product->sku = 'PROD-' . strtoupper(Str::random(8));
             }
         });
-        
     }
-
-
 
     //---------------------------   Relations   --------------------
 
     public function categories(){
-        return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Category::class , 'category_product');
     }
 
     public function store(){

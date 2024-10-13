@@ -22,10 +22,10 @@
                     <th scope="row">{{ $product->name }}</th>
                     <td>{{ $product->description }}</td>
                     <td>
-                        @if (!is_null($product->featured_image))
-                            <img src="{{ asset('storage/' . $product->featured_image) }}" width="50">
+                        @if(!is_null($product->image))
+                            <img width="50" src="{{ ImagesHelpers::imageView($product->image,'storage') }}">
                         @else
-                            {{ 'No Image' }}
+                            <p>No Image</p>
                         @endif
                     </td>
                     <td>{{ $product->meta_title }}</td>
@@ -36,7 +36,7 @@
                             <li>
                                 {{ $category->name}}
                             </li>
-                            @endforeach 
+                            @endforeach
                         </ul>
                     </td>
                     <td>
@@ -44,7 +44,7 @@
                             @if (!is_null($product->meta_keywords))
                                 @foreach ( json_decode($product->meta_keywords , true) as $keyword )
                                 <li>{{ $keyword }}</li>
-                                @endforeach 
+                                @endforeach
                             @else
                                 <p>No Keyword</p>
                             @endif

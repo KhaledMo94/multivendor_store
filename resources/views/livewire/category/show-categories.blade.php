@@ -1,3 +1,4 @@
+@use('App\Helpers\ImagesHelpers')
 <div>
     <table class="table table-striped">
         <thead>
@@ -27,10 +28,10 @@
                     <td>{{ !is_null($category->children) ? $category->children->count() : '0' }}</td>
                     <td>{{ $category->description ?? '' }}</td>
                     <td>
-                        @if (!is_null($category->image))
-                            <img src="{{ asset('storage/' . $category->image) }}" width="50">
+                        @if(!is_null($category->image))
+                            <img width="50" src="{{ ImagesHelpers::imageView($category->image,'storage') }}">
                         @else
-                            {{ 'No Image' }}
+                            <p>No Image</p>
                         @endif
                     </td>
                     <td>{{ $category->status }}</td>
@@ -63,7 +64,7 @@
                 </tr>
             @empty
             <p class="font-weight-bolder">
-                Still No Categories Created 
+                Still No Categories Created
                 <a href="{{ route('dashboard.categories.create') }}">Create Now</a>
             </p>
             @endforelse

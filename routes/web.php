@@ -2,12 +2,9 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StoreController;
-use App\Models\Dashboard\Product;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Route::get('/breeze', function () {
     return view('dashboard');
@@ -21,5 +18,8 @@ Route::middleware('auth','verified')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+require __DIR__.'/front.php';
 
 Route::resource('store', StoreController::class);
+
+
