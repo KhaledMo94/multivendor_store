@@ -7,13 +7,13 @@
                     <div class="hero-slider">
                         <!-- Start Single Slider -->
                         <div class="single-slider"
-                            style="background-image:url({{ Image::imageView($product->featured_image) }})">
+                            style="background-image:url({{ Image::imageView($product[0]->featured_image) }})">
                             <div class="content">
                                 <h2><span>No restocking fee ($35 savings)</span>
-                                    {{ $product->name }}
+                                    {{ $product[0]->name }}
                                 </h2>
-                                <p>{{ $product->description }}</p>
-                                <h3><span>Now Only</span>{{ $product->sale_price }}</h3>
+                                <p>{{ $product[0]->description }}</p>
+                                <h3><span>Now Only</span>{{ $product[0]->sale_price }}</h3>
                                 <div class="button">
                                     <a href="product-grids.html" class="btn">Shop Now</a>
                                 </div>
@@ -22,14 +22,14 @@
                         <!-- End Single Slider -->
                         <!-- Start Single Slider -->
                         <div class="single-slider"
-                            style="background-image:url({{ Image::imageView($product->featured_image) }})">
+                            style="background-image:url({{ Image::imageView($product[1]->featured_image) }})">
                             <div class="content">
                                 <h2><span>Big Sale Offer</span>
                                     Get the Best Deal on CCTV Camera
                                 </h2>
                                 <p>Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut
                                     labore dolore magna aliqua.</p>
-                                <h3><span>Combo Only:</span> {{ $product->description }}</h3>
+                                <h3><span>Combo Only:</span> {{ $product[1]->description }}</h3>
                                 <div class="button">
                                     <a href="product-grids.html" class="btn">Shop Now</a>
                                 </div>
@@ -45,13 +45,13 @@
                     <div class="col-lg-12 col-md-6 col-12 md-custom-padding">
                         <!-- Start Small Banner -->
                         <div class="hero-small-banner"
-                            style="background-image: url('https://via.placeholder.com/370x250');">
+                            style="background-image: url('{{ Image::imageView($product[2]->featured_image) }}');">
                             <div class="content">
                                 <h2>
                                     <span>New line required</span>
-                                    iPhone 12 Pro Max
+                                    {{ $product[2]->name }}
                                 </h2>
-                                <h3>$259.99</h3>
+                                <h3>{{ $product[2]->sale_price }}</h3>
                             </div>
                         </div>
                         <!-- End Small Banner -->

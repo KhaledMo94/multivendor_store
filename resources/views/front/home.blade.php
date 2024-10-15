@@ -1,6 +1,6 @@
 <x-front.front-layout uses_livewire='true' >
         <!-- Start Hero Area -->
-        <x-front.hero :product="$products->first()"/>
+        <x-front.hero :product="$products->take(3)"/>
         <!-- End Hero Area -->
 
         <!-- Start Featured Categories Area -->
@@ -21,7 +21,7 @@
                 </div>
                 <div class="row">
                     @forelse ( $products as $product )
-                        <x-front.product-home :product="$product" />
+                        @livewire('front.add-to-card', ['product' => $product])
                     @empty
                         <p>Still No Products</p>
                     @endforelse

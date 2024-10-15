@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable 
+class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
@@ -18,7 +18,7 @@ class User extends Authenticatable
      */
     public function __construct()
     {
-        
+
     }
     protected $fillable = [
         'name',
@@ -53,5 +53,9 @@ class User extends Authenticatable
         return $this->hasMany(Store::class);
     }
 
-    
+    public function carts(){
+        return $this->hasMany(Cart::class);
+    }
+
+
 }
