@@ -13,7 +13,7 @@
                                     {{ $product[0]->name }}
                                 </h2>
                                 <p>{{ $product[0]->description }}</p>
-                                <h3><span>Now Only</span>{{ $product[0]->sale_price }}</h3>
+                                <h3><span>Now Only</span>{{ Currency::show($product[0]->sale_price) }}</h3>
                                 <div class="button">
                                     <a href="product-grids.html" class="btn">Shop Now</a>
                                 </div>
@@ -51,7 +51,7 @@
                                     <span>New line required</span>
                                     {{ $product[2]->name }}
                                 </h2>
-                                <h3>{{ $product[2]->sale_price }}</h3>
+                                <h3>{{ Currency::show($product[2]->sale_price) }}</h3>
                             </div>
                         </div>
                         <!-- End Small Banner -->

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use App\Models\Dashboard\Category;
 use App\Models\Dashboard\Product;
+use App\Repositories\Cart\CartRepositoryInterface;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,5 +25,13 @@ class HomeController extends Controller
             'products'                  =>$products,
             'categories'                =>$categories,
         ]);
+    }
+
+    public function checkout(CartRepositoryInterface $cart)
+    {
+        $items = $cart->get();
+        $total = $cart->total();
+
+        return view('front.checkout',compact('items','total'));
     }
 }

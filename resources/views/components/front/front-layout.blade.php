@@ -36,10 +36,10 @@
     <x-front.preloader />
     <!-- /End Preloader -->
 
-    {{$breadcrumb ?? ''}}
     <!-- Start Header Area -->
     <x-front.header-nav />
     <!-- End Header Area -->
+    {{$breadcrumb ?? ''}}
 
     {{ $slot }}
 

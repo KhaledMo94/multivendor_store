@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Helpers\CurrenciesHelpers;
 use Faker\Factory;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Carbon;
@@ -19,6 +20,7 @@ class AppServiceProvider extends ServiceProvider
     {
         class_alias(Carbon::class , 'Carbon');
         class_alias(ImagesHelpers::class,'Image');
+        class_alias(CurrenciesHelpers::class,'Currency');
     }
 
     /**

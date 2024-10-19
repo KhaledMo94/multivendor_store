@@ -29,7 +29,7 @@
                 <li><span>4.0 Review(s)</span></li>
             </ul>
             <div class="price">
-                <span>{{ $product->sale_price }}</span>
+                <span>{{ Currency::show($product->sale_price , 'USD') }}</span>
             </div>
         </div>
     </div>
