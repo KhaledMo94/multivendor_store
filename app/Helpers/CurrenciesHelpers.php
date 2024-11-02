@@ -28,6 +28,6 @@ class CurrenciesHelpers
 
     public static function convertCurrency()
     {
-
+        
     }
 }

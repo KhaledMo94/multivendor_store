@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Dashboard\Product;
+use App\Models\Front\Order;
 use App\Models\Scopes\ActiveScope;
 use App\Models\Scopes\StoreScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -32,6 +33,10 @@ class Store extends Model
         ]);
     }
 
+    public function orders(){
+        return $this->hasMany(Order::class);
+    }
+    
     public function products(){
         return $this->hasMany(Product::class);
     }

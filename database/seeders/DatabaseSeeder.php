@@ -23,10 +23,13 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         // Tag::factory(30)->create();
-        // $this->call(UserSeeder::class);
-        // $this->call(StoreSeeder::class);
+        $this->call([
+            // StoreSeeder::class,
+            // RolesAndPermissionsSeeder::class,
+            UserSeeder::class,
+        ]);
+        // Product::factory(50)->create();
         // Store::factory(3)->create();
 
-        // Product::factory(50)->create();
     }
 }

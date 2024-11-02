@@ -5,6 +5,12 @@
 
         <!-- Start Featured Categories Area -->
         <x-front.home-featured-categories :categories="$categories" />
+
+        @if ( session()->has('message'))
+            <div class="bg-success text-center">
+                {{ session('message') }}
+            </div>
+        @endif
         <!-- End Features Area -->
 
         <!-- Start Trending Product Area -->

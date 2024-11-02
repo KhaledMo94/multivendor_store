@@ -31,7 +31,7 @@
                     <div class="content">
                         <h4><a href="product-details.html">
                                 {{ $item->product->name }}</a></h4>
-                        <p class="quantity">{{ $item->quantity }}x - <span class="amount">${{ $item->product->sale_price }}</span></p>
+                        <p class="quantity">{{ $item->quantity }}x - <span class="amount">{{ Currency::show($item->product->sale_price) }}</span></p>
                     </div>
                 </li>
                 @empty
@@ -41,10 +41,10 @@
             <div class="bottom">
                 <div class="total">
                     <span>Total</span>
-                    <span class="total-amount">{{ $total }}</span>
+                    <span class="total-amount">{{ Currency::show($total) }}</span>
                 </div>
                 <div class="button">
-                    <a href="checkout.html" class="btn animate">Checkout</a>
+                    <a href="{{ route('front.checkout') }}" class="btn animate">Checkout</a>
                 </div>
             </div>
         </div>

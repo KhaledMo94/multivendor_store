@@ -21,6 +21,15 @@
     </x-slot:breadcrumb>
 
         <!--====== Checkout Form Steps Part Start ======-->
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
         <section class="checkout-wrapper section">
             <div class="container">
@@ -28,7 +37,8 @@
                     <div class="col-lg-8">
                         <div class="checkout-steps-form-style-1">
                             <ul id="accordionExample">
-                                <form action="" method="post">
+                                <form action="{{ route('create.order') }}" method="post">
+                                    @csrf
                                     <li>
                                         <h6 class="title" data-bs-toggle="collapse" data-bs-target="#collapseThree"
                                             aria-expanded="true" aria-controls="collapseThree">Your Personal Details </h6>
@@ -40,10 +50,10 @@
                                                         <label>User Name</label>
                                                         <div class="row">
                                                             <div class="col-md-6 form-input form">
-                                                                <input type="text" placeholder="First Name">
+                                                                <x-form.input type="text" label="" name="addr[billing][first_name]" placeholder="First Name"/>
                                                             </div>
                                                             <div class="col-md-6 form-input form">
-                                                                <input type="text" placeholder="Last Name">
+                                                                <x-form.input type="text" label="" name="addr[billing][last_name]]" placeholder="Last Name"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -52,7 +62,7 @@
                                                     <div class="single-form form-default">
                                                         <label>Email Address</label>
                                                         <div class="form-input form">
-                                                            <input type="text" placeholder="Email Address">
+                                                            <x-form.input type="text" name="addr[billing][mail]" label="" placeholder="Email Address"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -60,15 +70,15 @@
                                                     <div class="single-form form-default">
                                                         <label>Phone Number</label>
                                                         <div class="form-input form">
-                                                            <input type="text" placeholder="Phone Number">
+                                                            <x-form.input type="text" name="addr[billing][phone]" label="" placeholder="Phone Number"/>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <div class="single-form form-default">
-                                                        <label>Mailing Address</label>
+                                                        <label>Street Address</label>
                                                         <div class="form-input form">
-                                                            <input type="text" placeholder="Mailing Address">
+                                                            <x-form.input type="text" name="addr[billing][street_address]" label="" placeholder="Street Address"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -76,7 +86,7 @@
                                                     <div class="single-form form-default">
                                                         <label>City</label>
                                                         <div class="form-input form">
-                                                            <input type="text" placeholder="City">
+                                                            <x-form.input type="text" name="addr[billing][city]" label="" placeholder="City"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -84,7 +94,7 @@
                                                     <div class="single-form form-default">
                                                         <label>Post Code</label>
                                                         <div class="form-input form">
-                                                            <input type="text" placeholder="Post Code">
+                                                            <x-form.input type="text" name="addr[billing][postal_code]" label="" placeholder="Post Code"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -92,25 +102,22 @@
                                                     <div class="single-form form-default">
                                                         <label>Country</label>
                                                         <div class="form-input form">
-                                                            <input type="text" placeholder="Country">
+                                                            <x-form.input type="text" name="addr[billing][country]" label="" placeholder="Country"/>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
+                                                {{-- <div class="col-md-6">
                                                     <div class="single-form form-default">
                                                         <label>Region/State</label>
                                                         <div class="select-items">
-                                                            <select class="form-control">
-                                                                <option value="0">select</option>
-                                                                <option value="1">select option 01</option>
-                                                                <option value="2">select option 02</option>
-                                                                <option value="3">select option 03</option>
-                                                                <option value="4">select option 04</option>
-                                                                <option value="5">select option 05</option>
+                                                            <x-form.select name="addr[billing[state]"
+                                                            label=""
+                                                            :collection="collect(['0'=>'option 0','1'=>'option 1'])"
+                                                            class="form-control"/>
                                                             </select>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                                 <div class="col-md-12">
                                                     <div class="single-checkbox checkbox-style-3">
                                                         <input type="checkbox" id="checkbox-3">
@@ -122,7 +129,8 @@
                                                     <div class="single-form button">
                                                         <button class="btn" data-bs-toggle="collapse"
                                                             data-bs-target="#collapseFour" aria-expanded="false"
-                                                            aria-controls="collapseFour">next
+                                                            aria-controls="collapseFour"
+                                                            onclick="event.preventDefault();">next
                                                             step</button>
                                                     </div>
                                                 </div>
@@ -140,10 +148,10 @@
                                                         <label>User Name</label>
                                                         <div class="row">
                                                             <div class="col-md-6 form-input form">
-                                                                <input type="text" placeholder="First Name">
+                                                                <x-form.input label="" type="text" name="addr[shipping][first_name]" placeholder="First Name"/>
                                                             </div>
                                                             <div class="col-md-6 form-input form">
-                                                                <input type="text" placeholder="Last Name">
+                                                                <x-form.input label="" type="text" name="addr[shipping][last_name]" placeholder="Last Name"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -152,7 +160,7 @@
                                                     <div class="single-form form-default">
                                                         <label>Email Address</label>
                                                         <div class="form-input form">
-                                                            <input type="text" placeholder="Email Address">
+                                                            <x-form.input label="" type="text" name="addr[shipping][mail]" placeholder="Email Address"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -160,15 +168,15 @@
                                                     <div class="single-form form-default">
                                                         <label>Phone Number</label>
                                                         <div class="form-input form">
-                                                            <input type="text" placeholder="Phone Number">
+                                                            <x-form.input label="" type="text" name="addr[shipping][phone]" placeholder="Phone Number"/>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <div class="single-form form-default">
-                                                        <label>Mailing Address</label>
+                                                        <label>Street Address</label>
                                                         <div class="form-input form">
-                                                            <input type="text" placeholder="Mailing Address">
+                                                            <x-form.input label="" type="text" name="addr[shipping][street_address]" placeholder="Street Address"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -176,7 +184,7 @@
                                                     <div class="single-form form-default">
                                                         <label>City</label>
                                                         <div class="form-input form">
-                                                            <input type="text" placeholder="City">
+                                                            <x-form.input label="" type="text" name="addr[shipping][city]" placeholder="City"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -184,7 +192,7 @@
                                                     <div class="single-form form-default">
                                                         <label>Post Code</label>
                                                         <div class="form-input form">
-                                                            <input type="text" placeholder="Post Code">
+                                                            <x-form.input label="" type="text" name="addr[shipping][postal_code]" placeholder="Post Code"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -192,26 +200,24 @@
                                                     <div class="single-form form-default">
                                                         <label>Country</label>
                                                         <div class="form-input form">
-                                                            <input type="text" placeholder="Country">
+                                                            <x-form.input label="" type="text" name="addr[shipping][country]" placeholder="Country"/>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
+                                                {{-- <div class="col-md-6">
                                                     <div class="single-form form-default">
                                                         <label>Region/State</label>
                                                         <div class="select-items">
-                                                            <select class="form-control">
-                                                                <option value="0">select</option>
-                                                                <option value="1">select option 01</option>
-                                                                <option value="2">select option 02</option>
-                                                                <option value="3">select option 03</option>
-                                                                <option value="4">select option 04</option>
-                                                                <option value="5">select option 05</option>
+                                                            <x-form.select
+                                                            label=""
+                                                            :collection="collect(['0'=>'option 0','1'=>'option 1'])"
+                                                            class="form-control"/>
+                                                            </select>
                                                             </select>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-12">
+                                                </div> --}}
+                                                {{-- <div class="col-md-12">
                                                     <div class="checkout-payment-option">
                                                         <h6 class="heading-6 font-weight-400 payment-title">Select Delivery
                                                             Option</h6>
@@ -254,19 +260,19 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                                 <div class="col-md-12">
                                                     <div class="steps-form-btn button">
                                                         <button class="btn" data-bs-toggle="collapse"
                                                             data-bs-target="#collapseThree" aria-expanded="false"
                                                             aria-controls="collapseThree">previous</button>
-                                                        <a href="javascript:void(0)" class="btn btn-alt">Save & Continue</a>
+                                                        <button href="javascript:void(0)" type="submit"  class="btn btn-alt">Proceed To Checkout</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </section>
                                     </li>
-                                    <li>
+                                    {{-- <li>
                                         <h6 class="title collapsed" data-bs-toggle="collapse" data-bs-target="#collapsefive"
                                             aria-expanded="false" aria-controls="collapsefive">Payment Info</h6>
                                         <section class="checkout-steps-form-content collapse" id="collapsefive"
@@ -315,7 +321,7 @@
                                                 </div>
                                             </div>
                                         </section>
-                                    </li>
+                                    </li> --}}
                                 </form>
                             </ul>
                         </div>
@@ -342,7 +348,7 @@
                                     @forelse ( $items as $item )
                                     <div class="total-price">
                                         <p class="value">{{ $item->product->name }}:</p>
-                                        <p class="price">${{ $item->product->sale_price * $item->quantity }}</p>
+                                        <p class="price">{{ Currency::show($item->product->sale_price * $item->quantity) }}</p>
                                     </div>
                                     @empty
                                     <p>No Products Selected</p>
@@ -352,7 +358,7 @@
                                 <div class="total-payable">
                                     <div class="payable-price">
                                         <p class="value">Subotal Price:</p>
-                                        <p class="price">${{ $total }}</p>
+                                        <p class="price">{{ Currency::show($total) }}</p>
                                     </div>
                                 </div>
                                 <div class="price-table-btn button">

@@ -27,7 +27,6 @@ class StoreFactory extends Factory
             'address'           =>fake()->address(),
             'city'              =>fake()->city(),
             'country'           =>fake()->countryCode(),
-            'user_id'           =>1
         ];
     }
 }

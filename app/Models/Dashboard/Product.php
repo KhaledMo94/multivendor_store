@@ -7,6 +7,7 @@ use App\Models\Scopes\LatestScope;
 use App\Models\Scopes\StoreScope;
 use App\Models\Store;
 use App\Models\Tag;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -68,6 +69,18 @@ class Product extends Model
             'sale_price'        =>['required','numeric'],
             'store_id'          =>['nullable','integer',Rule::exists('stores','id')],
         ];
+    }
+
+    public function salePrice(){
+        return Attribute::make(
+            get : fn ($sale_price)  =>round($sale_price , 2)
+        );
+    }
+
+    public function price(){
+        return Attribute::make(
+            get : fn ($price)  =>round($price , 2),
+        );
     }
 
 }

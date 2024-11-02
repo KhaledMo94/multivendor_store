@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->string('slug')->unique();
             $table->string('meta_title')->nullable();
+            $table->foreignId('store_id')
+            ->constrained('stores')->cascadeOnDelete();
             $table->text('description')->nullable();
             $table->text('meta_description')->nullable();
             $table->json('meta_keywords')->nullable();
