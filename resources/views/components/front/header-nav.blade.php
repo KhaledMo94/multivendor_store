@@ -47,15 +47,31 @@
                     <div class="top-end">
                         <div class="user">
                             <i class="lni lni-user"></i>
-                            Hello
+                            @guest
+                                Hello
+                            @endguest
+                            @auth
+                                {{ Auth::user()->name }}
+                            @endauth
                         </div>
                         <ul class="user-login">
+                            @guest
                             <li>
-                                <a href="login.html">Sign In</a>
+                                <a href="{{ route('login') }}">Sign In</a>
                             </li>
                             <li>
-                                <a href="register.html">Register</a>
+                                <a href="{{ route('register') }}">Register</a>
                             </li>
+                            @endguest
+                            @auth
+                                <form action="{{ route('logout') }}" method="post">
+                                    @csrf
+                                    <button
+                                    type="submit"
+                                    id="logout-btn"
+                                    class="text-white ms-2 bg-transparent border-0">Logout</button>
+                                </form>
+                            @endauth
                         </ul>
                     </div>
                 </div>

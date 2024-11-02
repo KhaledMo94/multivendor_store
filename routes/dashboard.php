@@ -5,11 +5,12 @@ use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\ProductController;
 
 Route::group([
-    'prefix'                =>'admin'
+    'prefix'                =>'admin',
+    'middleware'            =>['auth','role:super_admin|moderator']
 ],function(){
     Route::get('dashboard',[Dashboard::class , 'index'])
     ->name('dashboard');
-    
+
     Route::resource('categories',CategoryController::class)->names([
         'index'             =>'dashboard.categories.index',
         'create'            =>'dashboard.categories.create',

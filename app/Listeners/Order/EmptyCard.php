@@ -23,6 +23,6 @@ class EmptyCard
      */
     public function handle(OrderCreated $event): void
     {
-        // $this->cart->empty();
+        $this->cart->empty();
     }
 }

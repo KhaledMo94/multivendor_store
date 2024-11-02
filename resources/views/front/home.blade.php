@@ -1,16 +1,15 @@
 <x-front.front-layout uses_livewire='true' >
+    @if ( session()->has('message'))
+        <div class="bg-success text-center text-white">
+            {{ session('message') }}
+        </div>
+    @endif
         <!-- Start Hero Area -->
         <x-front.hero :product="$products->take(3)"/>
         <!-- End Hero Area -->
 
         <!-- Start Featured Categories Area -->
         <x-front.home-featured-categories :categories="$categories" />
-
-        @if ( session()->has('message'))
-            <div class="bg-success text-center">
-                {{ session('message') }}
-            </div>
-        @endif
         <!-- End Features Area -->
 
         <!-- Start Trending Product Area -->
