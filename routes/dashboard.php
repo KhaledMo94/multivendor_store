@@ -2,6 +2,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Dashboard;
 use App\Http\Controllers\Dashboard\CategoryController;
+use App\Http\Controllers\Dashboard\NotificationsController;
 use App\Http\Controllers\Dashboard\ProductController;
 
 Route::group([
@@ -30,4 +31,7 @@ Route::group([
         'show'              =>'dashboard.products.show',
         'destroy'           =>'dashboard.products.destroy',
     ]);
+
+    Route::get('notifications' , [NotificationsController::class, 'index'])
+    ->name('dashboard.notifications.index');
 });

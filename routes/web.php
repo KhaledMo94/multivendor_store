@@ -1,9 +1,9 @@
 <?php
 
+use App\Http\Controllers\Payment\PaypalController;
+use App\Http\Controllers\Payment\PaypalWebhookController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StoreController;
-use App\Models\Dashboard\Product;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 
@@ -24,5 +24,13 @@ require __DIR__.'/front.php';
 
 Route::resource('store', StoreController::class);
 
+Route::group([
+    'prefix'                    =>'paypal',
+],function(){
+    Route::get('payment',[PaypalController::class,'payment'])->name('paypal.payment');
+    Route::get('cancel',[PaypalController::class,'cancel'])->name('paypal.cancel');
+    Route::get('success',[PaypalController::class,'success'])->name('paypal.success');
+    Route::post('webhook', [PaypalWebhookController::class, 'handlePaypalWebhook']);
+});
 
 

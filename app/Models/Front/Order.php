@@ -3,7 +3,7 @@
 namespace App\Models\Front;
 
 use App\Models\Dashboard\Product;
-use App\Models\Order_Adress;
+use App\Models\OrderAdress;
 use App\Models\OrderProductPivot;
 use App\Models\Store;
 use App\Models\User;
@@ -16,7 +16,7 @@ class Order extends Model
 
     protected $fillable = [
         'store_id','user_id','number','status','street_address',
-        'payment_method','payment_status',
+        'payment_method','payment_status','reference_id'
     ];
 
     protected static function booted()
@@ -55,6 +55,6 @@ class Order extends Model
 
     public function addresses()
     {
-        return $this->hasMany(Order_Adress::class);
+        return $this->hasMany(OrderAdress::class);
     }
 }

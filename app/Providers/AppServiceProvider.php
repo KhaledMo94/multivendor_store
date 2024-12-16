@@ -9,6 +9,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use App\Helpers\ImagesHelpers;
+use App\Helpers\TimeHelpers;
 use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
@@ -21,6 +22,7 @@ class AppServiceProvider extends ServiceProvider
         class_alias(Carbon::class , 'Carbon');
         class_alias(ImagesHelpers::class,'Image');
         class_alias(CurrenciesHelpers::class,'Currency');
+        class_alias(TimeHelpers::class, 'Time');
     }
 
     /**

@@ -10,8 +10,10 @@
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.5",
         "moneyphp/money": "^4.5",
+        "paypal/paypal-checkout-sdk": "1.0.1",
         "pharaonic/livewire-tagify": "^1.2",
-        "spatie/laravel-permission": "^6.9"
+        "spatie/laravel-permission": "^6.9",
+        "srmklive/paypal": "^3.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

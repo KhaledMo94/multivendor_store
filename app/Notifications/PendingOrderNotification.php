@@ -1,25 +1,22 @@
 <?php
 
-namespace App\Notifications\Order;
+namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class OrderCreatedNotificationsToAdmins extends Notification
+class PendingOrderNotification extends Notification
 {
     use Queueable;
 
-    public $order;
-    public $addr;
     /**
      * Create a new notification instance.
      */
-    public function __construct($order, $addr)
+    public function __construct()
     {
-        $this->order = $order;
-        $this->addr = $addr;
+        //
     }
 
     /**
@@ -29,7 +26,7 @@ class OrderCreatedNotificationsToAdmins extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['database', 'mail'];
+        return ['mail'];
     }
 
     /**
@@ -38,8 +35,8 @@ class OrderCreatedNotificationsToAdmins extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
+                    ->line('process your purchase')
+                    ->action('complete payment now', url('/'))
                     ->line('Thank you for using our application!');
     }
 
@@ -51,10 +48,7 @@ class OrderCreatedNotificationsToAdmins extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            'title'                 =>"New Order Requested",
-            'items'                 =>$this->order,
-            'billing'               =>$this->addr['addr']['billing'],
-            'shipping'               =>$this->addr['addr']['shipping'],
+            //
         ];
     }
 }

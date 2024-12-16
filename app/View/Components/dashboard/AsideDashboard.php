@@ -23,6 +23,10 @@ class AsideDashboard extends Component
                 'name'                      =>'Products',
                 'route_url'                =>route('dashboard.products.index'),
             ],
+            'notifications'         =>[
+                'name'                      =>'Notifications',
+                'route_url'                 =>route('dashboard.notifications.index'),
+            ],
         ];
     }
 
@@ -32,6 +36,7 @@ class AsideDashboard extends Component
     public function render(): View|Closure|string
     {
         $parameter = Request::segment(2);
-        return view('components.dashboard.aside-dashboard',compact('parameter'));
+        return view('components.dashboard.aside-dashboard',
+        compact('parameter'));
     }
 }

@@ -55,6 +55,7 @@ class ProductAlertNotification extends Notification implements ShouldQueue
     public function toArray(object $notifiable): array
     {
         return [
+            "title"                     =>"Action Requered To Product {$this->product->name}",
             'product name'              =>$this->product->name,
             'username'                  =>$notifiable->name,
             'stock'                     =>$this->product->stock,

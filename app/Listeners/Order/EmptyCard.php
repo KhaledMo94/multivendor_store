@@ -3,6 +3,8 @@
 namespace App\Listeners\Order;
 
 use App\Events\OrderEvents\OrderCreated;
+use App\Events\OrderEvents\PurchaseCompleted;
+use App\Events\OrderPaymentSuccess;
 use App\Repositories\Cart\CartRepositoryInterface;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -21,7 +23,7 @@ class EmptyCard
     /**
      * Handle the event.
      */
-    public function handle(OrderCreated $event): void
+    public function handle(OrderPaymentSuccess $event): void
     {
         $this->cart->empty();
     }

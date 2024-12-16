@@ -56,6 +56,7 @@ class OrderCreatedNotificationToCustomer extends Notification
     public function toArray(object $notifiable): array
     {
         return [
+            'title'                         =>"Your Order Has Been Requested",
             'store_id'                      =>$this->store->id,
             'store_name'                    =>$this->store->name,
             'order'                         =>$this->order,

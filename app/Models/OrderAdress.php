@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+use App\Models\Front\Order;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
-class Order_Adress extends Model
+class OrderAdress extends Model
 {
     use HasFactory , Notifiable;
 
@@ -19,5 +20,13 @@ class Order_Adress extends Model
     ];
 
     public $timestamps = false;
+
+    public function order(){
+        return $this->belongsTo(Order::class);
+    }
+
+    public function routeNotificationForEmail(){
+        return $this->mail;
+    }
 
 }
