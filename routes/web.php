@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\Payment\PaypalController;
 use App\Http\Controllers\Payment\PaypalWebhookController;
 use App\Http\Controllers\ProfileController;
@@ -31,6 +32,13 @@ Route::group([
     Route::get('cancel',[PaypalController::class,'cancel'])->name('paypal.cancel');
     Route::get('success',[PaypalController::class,'success'])->name('paypal.success');
     Route::post('webhook', [PaypalWebhookController::class, 'handlePaypalWebhook']);
+});
+
+Route::group([
+    'prefix'                    =>'auth',
+],function($provider){
+    Route::get('{provider}/redirect',[GoogleController::class,'googleRedirect'])->name('socialite.redirect');
+    Route::get('{provider}/callback',[GoogleController::class,'googleCallback'])->name('socialite.callback');
 });
 
 

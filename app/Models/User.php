@@ -51,10 +51,6 @@ class User extends Authenticatable
         ];
     }
 
-    public function stores(){
-        return $this->hasMany(Store::class);
-    }
-
     public function carts(){
         return $this->hasMany(Cart::class);
     }
@@ -63,6 +59,11 @@ class User extends Authenticatable
         return $this->hasMany(Order::class);
     }
 
-
+    public static function boot()
+    {
+        static::created(function($user){
+            $user->assignRole('customer');
+        });
+    }
 
 }

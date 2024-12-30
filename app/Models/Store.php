@@ -21,10 +21,6 @@ class Store extends Model
         'meta_description','country','city','postal_code',
     ];
 
-    public function owner(){
-        return $this->belongsTo(User::class);
-    }
-
     protected static function booted()
     {
         static::addGlobalScopes([
@@ -36,7 +32,7 @@ class Store extends Model
     public function orders(){
         return $this->hasMany(Order::class);
     }
-    
+
     public function products(){
         return $this->hasMany(Product::class);
     }
